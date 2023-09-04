@@ -66,7 +66,7 @@ function equalPairs(grid: number[][]): number {
       }
       const columnKey = column.join(",")
       if (rowMap.has(columnKey)) {
-        res += rowMap.get(columnKey)
+        res += rowMap.get(columnKey)!
       }
     }
     

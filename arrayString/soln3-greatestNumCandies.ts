@@ -39,10 +39,11 @@
 
 function kidsWithCandies(candies: number[], extraCandies:number): boolean[] {
     let result:boolean[] = [];
+    let max = Math.max(...candies)
     for (let i = 0; i < candies.length; i++){
         let currentCandyValue = candies[i];
         currentCandyValue += extraCandies;
-        if (Math.max(...candies, currentCandyValue) === currentCandyValue){
+        if (max <= currentCandyValue){
             result.push(true);
         } else {
             result.push(false)

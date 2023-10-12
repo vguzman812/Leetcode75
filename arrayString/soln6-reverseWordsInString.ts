@@ -38,3 +38,8 @@ function reverseWords(s: string): string {
     let joinedString = reversedArr.join(" ")
     return joinedString
 }
+
+/**
+ * OR:
+ * return s.trim().split(" ").filter(e => e).reverse().join(" ")
+ */

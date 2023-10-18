@@ -101,3 +101,22 @@ function maxVowels(s: string, k: number): number {
 	}
 	return maxCount;
 }
+
+
+/**
+ * givne number k
+ * print out every integer from  1 to k
+ * when integer divisible by 3 print Fizz
+ * when divisible by 5 print out Buzz
+ * when divisible by both 3 and five print out Fizz Buzz
+ * 
+ * 
+ * function fizzBuzz(k){
+ *  // check if number % 3 === 0 and number % 5 === 0
+ *      if so then return "Fizz Buzz"
+ *  // check if number % 3 === 0
+ *      if so then return "Fizz"
+ *  // check if number % 5 === 0
+ *      if so then return "Buzz"
+ * }
+ */

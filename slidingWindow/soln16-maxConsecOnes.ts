@@ -50,20 +50,20 @@ function longestOnes(nums: number[], k: number): number {
 	while (right < nums.length) {
 		// Increase zeroCount if the current element is 0
 		if (nums[right] == 0) {
-			zeroCount = zeroCount + 1;
+			zeroCount++;
 		}
 		// Shrink the window if zeroCount is greater than k
 		while (zeroCount > k) {
 			if (nums[left] == 0) {
-				zeroCount = zeroCount - 1;
-				left = left + 1;
+				zeroCount--;
+				left++
 			}
 		}
 		// Update maxOnes if the current window size is greater
 		maxOnes = Math.max(maxOnes, right - left + 1);
 
 		// Move the right pointer
-		right = right + 1;
+		right++
 	}
 	return maxOnes;
 }

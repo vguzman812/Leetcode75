@@ -1,63 +1,62 @@
 /**
- * PREP
- * @description Given a binary (0,1) array of numbers, delete one element from it. 
- *              Return the size of the longest non-empty subarray containing only 1s.
- *              Return 0 if there is no such subarray
+ * https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/?envType=study-plan-v2&envId=leetcode-75
+ * @description
+ * given array nums filled with either 0's or 1's
+ * delete one element from array
+ * return length of longest subarray containing only 1s
+ * return 0 if array empty
+ *
  * @param {number[]} nums
  * @returns {number}
- * @example
- * input: nums = [1,1,0,1]
- * output: 3
- * Explanation: After deleting the number in position 2, [1,1,1] contains 3 numbers with value of 1's.
- * 
- * Input: nums = [0,1,1,1,0,1,1,0,1]
- * Output: 5
- * Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] 
- * longest subarray with value of 1's is [1,1,1,1,1].
- * 
- * Input: nums = [1,1,1]
- * Output: 2
- * Explanation: You must delete one element.
- * 
- * @pseudo
- *  
-    Initialize max_length to 0
-    Initialize left_pointer to 0
-    Initialize right_pointer to 0
-    Initialize zero_count to 0
-
-    Iterate right_pointer from 0 to length of nums:
-        If nums[right_pointer] is 0:
-            Increment zero_count by 1
-        If zero_count > 1:
-            While zero_count > 1:
-                If nums[left_pointer] is 0:
-                    Decrement zero_count by 1
-                Increment left_pointer by 1
-        Set max_length to the maximum of max_length and (right_pointer - left_pointer)
-
-    Return max_length - 1
+ * @pseudocode
+ * function longestOnes(nums: Array, k: Integer) -> Integer:
+ *     Initialize left = 0
+ *     Initialize right = 0
+ *     Initialize maxOnes = 0
+ *     Initialize zeroCount = 0
  *
+ *     while right < length of nums:
+ *         // Increase zeroCount if the current element is 0
+ *         if nums[right] == 0:
+ *             zeroCount = zeroCount + 1
+ *
+ *         // Shrink the window if zeroCount is greater than k
+ *         while zeroCount > k:
+ *             if nums[left] == 0:
+ *                 zeroCount = zeroCount - 1
+ *             left = left + 1
+ *
+ *         // Update maxOnes if the current window size is greater
+ *         maxOnes = max(maxOnes, right - left + 1)
+ *
+ *         // Move the right pointer
+ *         right = right + 1
+ *
+ *     return maxOnes
  */
 
-    function longestSubarray(nums: number[]): number {
-        let max_length = 0;
-        let left = 0;
-        let zeros = 0;
-        for (let right = 0; right < nums.length; right++){
-            if (nums[right] === 0) {
-                zeros++
-            }
-            if (zeros > 1) {
-                while (zeros > 1) {
-                    if (nums[left] === 0) {
-                        zeros--
-                    }
-                    left++
-                }
-            }
-            max_length = Math.max(max_length, (right - left))
-        }
-        return max_length
+function longestSubarray(nums: number[]): number {
+  let left = 0;
+  let right = 0;
+  let zeroes = 0;
+  let maxLength = 0;
+
+  while (right < nums.length) {
+    let rightElement = nums[right];
+    if (rightElement === 0) zeroes++;
+    while (zeroes > 1) {
+      let leftElement = nums[left];
+      if (leftElement === 0) zeroes--;
+      left++;
     }
-    
+    maxLength = Math.max(maxLength, right - left);
+    right++;
+  }
+  return maxLength;
+}
+console.log("result: expected:")
+console.log(longestSubarray([1, 1, 0, 1]),3);
+console.log(longestSubarray([0, 1, 1, 1, 0, 1, 1, 0, 1]), 5);
+console.log(longestSubarray([1, 1, 1]), 2);
+console.log(longestSubarray([]), 0);
+console.log(longestSubarray([0, 0, 0]), 0);
